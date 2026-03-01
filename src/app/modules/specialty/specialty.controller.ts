@@ -1,14 +1,16 @@
 import catchAsync from "@/app/custom/catch-async";
+import sendResponse from "@/app/custom/send-response";
 import { NextFunction, Request, Response } from "express";
+import status from "http-status";
 import { SpecialtyService } from "./specialty.service";
-
 export const SpecialtyController = {
   //! create a specialty
   createSpecialty: catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       const payload = req.body;
       const specialty = await SpecialtyService.createSpecialty(payload);
-      res.status(201).json({
+      sendResponse(res, {
+        statusCode: status.CREATED,
         success: true,
         message: "Specialty created successfully",
         data: specialty,
@@ -19,7 +21,8 @@ export const SpecialtyController = {
   getAllSpecialties: catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       const specialties = await SpecialtyService.getAllSpecialties();
-      res.status(200).json({
+      sendResponse(res, {
+        statusCode: status.OK,
         success: true,
         message: "Specialties retrieved successfully",
         data: specialties,
@@ -34,7 +37,8 @@ export const SpecialtyController = {
       const specialty = await SpecialtyService.getSpecialtyDetails(
         id as string,
       );
-      res.status(200).json({
+      sendResponse(res, {
+        statusCode: status.OK,
         success: true,
         message: "Specialty details retrieved successfully",
         data: specialty,
@@ -48,7 +52,8 @@ export const SpecialtyController = {
       {
         const payload = req.body;
         const specialty = await SpecialtyService.updateSpecialty(payload);
-        res.status(200).json({
+        sendResponse(res, {
+          statusCode: status.OK,
           success: true,
           message: "Specialty updated successfully",
           data: specialty,
@@ -62,7 +67,8 @@ export const SpecialtyController = {
     async (req: Request, res: Response, next: NextFunction) => {
       const { id } = req.body;
       await SpecialtyService.deleteSpecialty(id as string);
-      res.status(200).json({
+      sendResponse(res, {
+        statusCode: status.OK,
         success: true,
         message: "Specialty deleted successfully",
       });
