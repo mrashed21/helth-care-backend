@@ -11,21 +11,47 @@ export const SpecialtyService = {
   },
 
   //   ! get all specialties
-  getAllSpecialties: async () => {},
+  getAllSpecialties: async () => {
+    const specialties = await prisma.specialty.findMany({
+      where: { isDeleted: false },
+    });
+    return specialties;
+  },
 
-  //! get a specialty by id
-  getSpecialtyById: async (id: string) => {},
+  //! get a specialty details
+  getSpecialtyDetails: async (id: string) => {
+    const specialty = await prisma.specialty.findFirst({
+      where: {
+        id,
+        isDeleted: false,
+      },
+    });
+    return specialty;
+  },
 
-  //! update a specialty by id
-  updateSpecialtyById: async (
-    id: string,
-    data: {
-      title?: string;
-      description?: string;
-      icon?: string;
-    },
-  ) => {},
+  //! update a specialty 
+  updateSpecialty: async (payload: Specialty) => {
+    const specialty = await prisma.specialty.update({
+      where: {
+        id: payload.id,
+        isDeleted: false,
+      },
+      data: payload,
+    });
+    return specialty;
+  },
 
-  //! delete a specialty by id
-  deleteSpecialtyById: async (id: string) => {},
+  //! delete a specialty 
+  deleteSpecialty: async (id: string) => {
+    const specialty = await prisma.specialty.update({
+      where: {
+        id,
+        isDeleted: false,
+      },
+      data: {
+        isDeleted: true,
+      },
+    });
+    return specialty;
+  },
 };
