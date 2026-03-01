@@ -7,6 +7,6 @@ router.get("/", SpecialtyController.getAllSpecialties);
 router.post("/", SpecialtyController.createSpecialty);
 router.get("/:id", SpecialtyController.getSpecialtyDetails);
 router.patch("/", SpecialtyController.updateSpecialty);
-router.delete("/", SpecialtyController.deleteSpecialty);
+router.put("/", SpecialtyController.deleteSpecialty);
 
 export const SpecialtyRouter = router;

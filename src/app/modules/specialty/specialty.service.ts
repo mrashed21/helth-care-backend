@@ -29,7 +29,7 @@ export const SpecialtyService = {
     return specialty;
   },
 
-  //! update a specialty 
+  //! update a specialty
   updateSpecialty: async (payload: Specialty) => {
     const specialty = await prisma.specialty.update({
       where: {
@@ -41,7 +41,7 @@ export const SpecialtyService = {
     return specialty;
   },
 
-  //! delete a specialty 
+  //! delete a specialty
   deleteSpecialty: async (id: string) => {
     const specialty = await prisma.specialty.update({
       where: {
