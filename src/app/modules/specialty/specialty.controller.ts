@@ -17,6 +17,7 @@ export const SpecialtyController = {
       });
     },
   ),
+
   //! get all specialties
   getAllSpecialties: catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
